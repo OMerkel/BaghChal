@@ -1,0 +1,22 @@
+{
+  "version": "0.1",
+  "name": "Bagh Chal",
+  "description": "Bagh Chal - traditional abstract Nepalese board game with optional AI",
+  "launch_path": "/BaghChal/html5/src/index.html",
+  "icons": {
+    "16": "/BaghChal/html5/src/img/icons/tiger16.png",
+    "32": "/BaghChal/html5/src/img/icons/tiger32.png",
+    "48": "/BaghChal/html5/src/img/icons/tiger48.png",
+    "60": "/BaghChal/html5/src/img/icons/tiger60.png",
+    "64": "/BaghChal/html5/src/img/icons/tiger64.png",
+    "90": "/BaghChal/html5/src/img/icons/tiger90.png",
+    "120": "/BaghChal/html5/src/img/icons/tiger120.png",
+    "128": "/BaghChal/html5/src/img/icons/tiger128.png",
+    "256": "/BaghChal/html5/src/img/icons/tiger256.png"
+  },
+  "developer": {
+    "name": "Oliver Merkel",
+    "url": "https://github.com/OMerkel/BaghChal"
+  },
+  "installs_allowed_from": ["*"]
+}
