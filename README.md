@@ -82,7 +82,8 @@ The game board is created by GIMP coloring work of an Asian Games workshop versi
 Freer and Sackler Galleries, Smithsonian Institution. See files included in this
 repository for the uncolored PDF.
 
-The Smithsonian welcomes you to make fair use of the Content as defined by copyright law.
+The Smithsonian welcomes you to make fair use of the Content (here the game board)
+as defined by copyright law.
 Information on United States copyright fair use law is available from the United
 States Copyright Office: http://www.copyright.gov/fls/fl102.html.
 Please note that you are responsible for determining whether your use is fair and for
@@ -95,5 +96,7 @@ uses of the Content on the following terms:
 * You must also cite and link to, when possible, the SI Website as the source of the Content.
 * You may not remove any copyright, trademark, or other proprietary notices including attribution information, credits, and notices, that are placed in or near the text, images, or data.
 * You must comply with all terms or restrictions other than copyright (such as trademark, publicity and privacy rights, or contractual restrictions) as may be specified in the metadata or as may otherwise apply to the Content.
+
+For other legal information see the LICENSE file included in the repository.
 
 _All logos, brands, and trademarks mentioned belong to their respective owners._
