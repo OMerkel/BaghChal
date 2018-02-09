@@ -45,7 +45,7 @@ legal moves left according to the rules.
 
 ## Starting Position
 
-<img width='30%' ondragstart='return false;' alt='Initial board set up, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/initial_board.jpg' />
+<img width='50%' ondragstart='return false;' alt='Initial board set up, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/initial_board.jpg' />
 
 The four tigers are positioned in the corners of the game board.
 
