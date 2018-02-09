@@ -91,8 +91,9 @@ Thank you very much for drawing and publishing this as a template to others!
 
 ## Permitted Uses of the Game Board Design
 
-The game board is created by GIMP coloring work of an Asian Games workshop version from
-Freer and Sackler Galleries, Smithsonian Institution. See files included in this
+The game board is created by GIMP coloring work by Oliver Merkel of an
+[Asian Games workshop](https://www.freersackler.si.edu/learn/kids-and-families) version
+from Freer and Sackler Galleries, Smithsonian Institution. See files included in this
 repository for the uncolored PDF.
 
 The Smithsonian welcomes you to make fair use of the Content (here restricted to the game board only)
