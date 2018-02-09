@@ -16,13 +16,13 @@ strategy board game Bagh Chal for HTML5/Javascript/CSS platform.
 
 <table>
   <tr>
-    <td>
-<img width='30%' ondragstart='return false;' alt='Game board with algebraic notation, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/algebraic_notation.jpg' />
+    <td width='66%'>
+<img width='100%' ondragstart='return false;' alt='Game board with algebraic notation, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/algebraic_notation.jpg' />
     </td>
-    <td>
+    <td width='17%'>
 <img ondragstart='return false;' alt='Tiger checker, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/256tiger.png' />
     </td>
-    <td>
+    <td width='17%'>
 <img ondragstart='return false;' alt='Goat checker, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/256goat.png' />
     </td>
   </tr>
