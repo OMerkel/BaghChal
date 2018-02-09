@@ -39,7 +39,8 @@ The four tigers are positioned in the corners of the game board.
 
 ## Turn Sequence, Moving and Capturing
 
-Players' turn alternates between the two players. The player controlling the goats starts the game.
+Players' turn alternates between the two players. Passing a turn is not allowed.
+The player controlling the goats starts the game.
 The twenty goats have to be placed on free positions on board one at a time alternating
 with a tiger's move. During these initial twenty turns while there are goats left to be set on
 board no goat can change its board position. Anyway tigers may capture goats already.
