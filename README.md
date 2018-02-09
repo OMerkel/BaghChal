@@ -14,7 +14,19 @@ strategy board game Bagh Chal for HTML5/Javascript/CSS platform.
 
 ## Game Components
 
+<table>
+  <tr>
+    <td>
 <img width='30%' ondragstart='return false;' alt='Game board with algebraic notation, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/algebraic_notation.jpg' />
+    </td>
+    <td>
+<img ondragstart='return false;' alt='Tiger checker, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/256tiger.png' />
+    </td>
+    <td>
+<img ondragstart='return false;' alt='Goat checker, Creative Commons License, This image is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.' src='html5/src/img/256goat.png' />
+    </td>
+  </tr>
+</table>
 
 The rectangular Bagh Chal board has fixed dimension of 5 times 5 positions horizontally
 and vertically. Positions on board are connected by a fixed line pattern showing potential
@@ -83,7 +95,7 @@ The game board is created by GIMP coloring work of an Asian Games workshop versi
 Freer and Sackler Galleries, Smithsonian Institution. See files included in this
 repository for the uncolored PDF.
 
-The Smithsonian welcomes you to make fair use of the Content (here the game board)
+The Smithsonian welcomes you to make fair use of the Content (here restricted to the game board only)
 as defined by copyright law.
 Information on United States copyright fair use law is available from the United
 States Copyright Office: http://www.copyright.gov/fls/fl102.html.
@@ -98,6 +110,6 @@ uses of the Content on the following terms:
 * You may not remove any copyright, trademark, or other proprietary notices including attribution information, credits, and notices, that are placed in or near the text, images, or data.
 * You must comply with all terms or restrictions other than copyright (such as trademark, publicity and privacy rights, or contractual restrictions) as may be specified in the metadata or as may otherwise apply to the Content.
 
-For other legal information see the LICENSE file included in the repository.
+For other legal information on rest of graphics and design and source code see the LICENSE file included in the repository.
 
 _All logos, brands, and trademarks mentioned belong to their respective owners._
