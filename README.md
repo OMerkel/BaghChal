@@ -1,4 +1,4 @@
-<img alt="Bagh Chal icon" width="64" src="html5/src/img/icons/tiger128.png" /> Bagh Chal
+<img alt="Bagh Chal icon" width="64" src="html5/src/img/icons/baghchal128.png" /> Bagh Chal
 =============
 
 <b>Keywords, Categories</b> <em>Board Games, Games/Entertainment, Mobile, Abstract Game, Perfect-Information, 2-player Strategy Game</em>
