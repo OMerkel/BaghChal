@@ -1,0 +1,20 @@
+{
+  "name": "baghchal",
+  "version": "1.0.0",
+  "description": "BaghChal board game with UCT AI",
+  "type": "module",
+  "scripts": {
+    "_path": "$env:PATH = 'C:\\Program Files\\nodejs;' + $env:PATH",
+    "test": "npm run _path; node_modules/.bin/vitest.cmd run",
+    "test:watch": "npm run _path; node_modules/.bin/vitest.cmd",
+    "test:coverage": "npm run _path; node_modules/.bin/vitest.cmd run --coverage",
+    "test:e2e": "npm run _path; node_modules/.bin/playwright.cmd test",
+    "test:all": "npm run _path; node_modules/.bin/vitest.cmd run; node_modules/.bin/playwright.cmd test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
+    "@playwright/test": "^1.52.0",
+    "@vitest/coverage-v8": "^3.0.0",
+    "vitest": "^3.0.0"
+  }
+}

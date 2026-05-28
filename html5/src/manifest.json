@@ -1,0 +1,25 @@
+{
+  "name": "Bagh Chal",
+  "short_name": "Bagh Chal",
+  "description": "Play Bagh Chal in your browser with human and AI players.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#16213e",
+  "icons": [
+    { "src": "img/icons/baghchal32.png", "sizes": "32x32", "type": "image/png", "purpose": "any" },
+    {
+      "src": "img/icons/baghchal128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icons/baghchal256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

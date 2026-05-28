@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Play Bagh Chal in your browser with human and AI players, adjustable difficulty, and offline PWA support." />
+  <meta name="theme-color" content="#16213e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="img/icons/baghchal128.png" />
+  <link rel="manifest" href="manifest.json" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('service-worker.js', { updateViaCache: 'none' })
+          .then(registration => registration.update())
+          .catch(error => {
+            console.warn('Service worker registration failed:', error);
+          });
+      });
+    }
+  </script>
+  <meta name="AUTHOR" content="Oliver Merkel" />
+  <meta name="COPYRIGHT" content="Oliver Merkel" />
+  <title>Bagh Chal</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <header id="app-header">
+    <button id="btn-menu" class="icon-btn" type="button" aria-label="Open menu" aria-controls="side-panel">
+      <img src="img/icons/icon-bars.svg" alt="" />
+    </button>
+    <span id="app-header-title">Bagh Chal</span>
+    <span id="app-header-badge" aria-label="AI difficulty" aria-live="polite">Bagh Chal | Goats human | Tigers human | Desktop</span>
+  </header>
+
+  <main id="app-content">
+    <section id="view-game" class="view">
+      <noscript>
+        <p>This application requires JavaScript. Please enable it in your browser settings.</p>
+      </noscript>
+      <div id="board"></div>
+    </section>
+
+    <section id="view-rules" class="view view-section" hidden>
+      <h2>Rules</h2>
+
+      <p><b>Bagh Chal</b> is played on a 5x5 point board. Tigers start on the four corners while goats enter during the opening placement phase.</p>
+
+      <details>
+        <summary>Goal</summary>
+        <div>
+          <p>Tigers win by capturing at least five goats or by blocking all goat moves. Goats win by blocking all tiger moves.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Turn Sequence</summary>
+        <div>
+          <ol>
+            <li>Goats move first.</li>
+            <li>During the opening, goats place one new goat per turn until all twenty goats are on the board.</li>
+            <li>Tigers move one step along connected lines and may capture by jumping over one adjacent goat into a free point behind it.</li>
+            <li>If a tiger has at least one capture, a capture is mandatory.</li>
+            <li>Goats never capture.</li>
+          </ol>
+        </div>
+      </details>
+
+      <button class="btn btn-back" type="button">&#8592; Back</button>
+    </section>
+
+    <section id="view-options" class="view view-section" hidden>
+      <h2>Options</h2>
+      <p class="hint-text">Changes take effect immediately on AI turns and on new games.</p>
+      <form class="options-form" id="options-form">
+        <fieldset>
+          <legend>Goats player is...</legend>
+          <label><input type="radio" name="firstplayer" value="Human" checked />Human</label>
+          <label><input type="radio" name="firstplayer" value="AI" />AI</label>
+        </fieldset>
+        <fieldset>
+          <legend>Tigers player is...</legend>
+          <label><input type="radio" name="secondplayer" value="Human" checked />Human</label>
+          <label><input type="radio" name="secondplayer" value="AI" />AI</label>
+        </fieldset>
+        <fieldset>
+          <legend>Goats AI difficulty</legend>
+          <label><input type="radio" name="difficultysouth" value="Easy" />Easy</label>
+          <label><input type="radio" name="difficultysouth" value="Medium" checked />Medium</label>
+          <label><input type="radio" name="difficultysouth" value="Hard" />Hard</label>
+        </fieldset>
+        <fieldset>
+          <legend>Tigers AI difficulty</legend>
+          <label><input type="radio" name="difficultynorth" value="Easy" />Easy</label>
+          <label><input type="radio" name="difficultynorth" value="Medium" checked />Medium</label>
+          <label><input type="radio" name="difficultynorth" value="Hard" />Hard</label>
+        </fieldset>
+        <fieldset>
+          <legend>AI device profile</legend>
+          <label><input type="radio" name="deviceprofile" value="Auto" checked />Auto (detect)</label>
+          <label><input type="radio" name="deviceprofile" value="Desktop" />Desktop</label>
+          <label><input type="radio" name="deviceprofile" value="Mobile" />Mobile</label>
+        </fieldset>
+        <fieldset>
+          <legend>Piece selection behavior</legend>
+          <label><input type="radio" name="selectionmode" value="MustMove" checked />Once selected, piece must be moved</label>
+          <label><input type="radio" name="selectionmode" value="Flexible" />Selected piece can be deselected/reselected</label>
+        </fieldset>
+        <fieldset>
+          <legend>Board annotation</legend>
+          <label><input type="checkbox" name="showboardannotations" />Show field coordinates (a-e, 1-5)</label>
+        </fieldset>
+        <p class="hint-text" id="device-profile-hint">Auto currently resolves to Desktop.</p>
+      </form>
+      <button class="btn" id="btn-options-ok" type="button">OK</button>
+    </section>
+
+    <section id="view-about" class="view view-section" hidden>
+      <h2>About Bagh Chal</h2>
+
+      <h3>Legal</h3>
+      <figure class="diagram" style="float:right;margin-left:12px;width:35%;">
+        <img src="img/oliver_bagh_chal.jpg" alt="Oliver Merkel" />
+        <figcaption>
+          Oliver Merkel,
+          <a rel="license noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">cc-by-nc-nd 4.0</a>.
+        </figcaption>
+      </figure>
+      <p>
+        Copyright &copy; 2018, 2026<br />
+        <em>@author</em> Oliver Merkel, Merkel(dot)Oliver(at)web(dot)de.<br />
+        All rights reserved. Logos, brands, and trademarks belong to their respective owners.
+      </p>
+      <p>All source code (HTML, JavaScript, CSS) is released under the <strong>MIT License</strong>.</p>
+      <p>
+        If not otherwise stated, images are licensed under
+        <a rel="license noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0" target="_blank">
+          Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+        </a>.
+      </p>
+
+      <details>
+        <summary>Third-party Code Licenses</summary>
+        <div>
+          <p>This version uses <strong>no third-party libraries</strong>.</p>
+          <p>The AI engine uses the UCT / MCTS algorithm.</p>
+        </div>
+      </details>
+
+      <button class="btn btn-back" type="button">&#8592; Back</button>
+    </section>
+  </main>
+
+</div>
+
+<div id="panel-overlay" hidden></div>
+
+<nav id="side-panel" aria-label="Main navigation">
+  <p class="panel-title">Bagh Chal</p>
+  <ul class="panel-nav">
+    <li><button id="btn-panel-close" type="button">&#10005; Close</button></li>
+    <li class="panel-divider"></li>
+    <li><button id="nav-new" type="button">&#9654; New Game</button></li>
+    <li class="panel-divider"></li>
+    <li><button id="nav-rules" type="button">Rules&hellip;</button></li>
+    <li><button id="nav-options" type="button">Options&hellip;</button></li>
+    <li><button id="nav-about" type="button">About&hellip;</button></li>
+  </ul>
+</nav>
+
+<script type="module" src="js/hmi.js"></script>
+
+</body>
+</html>

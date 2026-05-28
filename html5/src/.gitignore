@@ -1,0 +1,4 @@
+/coverage
+/test-results
+/node_modules
+/playwright-report
