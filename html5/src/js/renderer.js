@@ -8,13 +8,9 @@ import {
   ANNOTATION_OFFSET_Y,
   BOARD_BORDER_MARGIN,
   BOARD_BORDER_MARGIN_TOTAL,
-  BOARD_BORDER_RADIUS,
-  BOARD_BORDER_WIDTH,
   BOARD_CELL_HEIGHT,
   BOARD_CELL_WIDTH,
-  BOARD_DIAGONAL_STROKE_WIDTH,
   BOARD_INTERACTION_RING_RADIUS,
-  BOARD_LINE_STROKE_WIDTH,
   BOARD_NODE_RADIUS,
   BOARD_PIECE_RADIUS,
   BOARD_VIEWBOX_HEIGHT,
@@ -69,14 +65,6 @@ const cellCenter = (row, col) => ({
   x: GRID_X + col * CELL_X,
   y: GRID_Y + row * CELL_Y,
 });
-
-const hasDiagonalEdges = (row, col) => (row + col) % 2 === 0;
-
-const pieceColor = piece => {
-  if (piece === SOUTH) return colors.south;
-  if (piece === NORTH) return colors.north;
-  return '#ffffff';
-};
 
 const createBoardPattern = () => {
   const layer = svgEl('g', { 'stroke-linecap': 'round' });
@@ -226,6 +214,92 @@ export const createRenderer = (container, onCellClick) => {
       return ring;
     })
   );
+
+  // Info panel (right of board): goats to place + goats captured
+  const INFO_PANEL_X = 1430;
+  const INFO_PANEL_Y = 340;
+  const INFO_PANEL_W = 330;
+  const INFO_PANEL_H = 230;
+  const INFO_ICON_SIZE = 60;
+  const INFO_ICON_X = INFO_PANEL_X + 22;
+
+  const infoPanel = svgEl('g', { 'pointer-events': 'none' });
+  infoPanel.appendChild(
+    svgEl('rect', {
+      x: INFO_PANEL_X,
+      y: INFO_PANEL_Y,
+      width: INFO_PANEL_W,
+      height: INFO_PANEL_H,
+      rx: 18,
+      fill: 'rgba(15,23,42,0.82)',
+      stroke: '#334155',
+      'stroke-width': 2,
+    })
+  );
+
+  // Row 1: goats to place
+  infoPanel.appendChild(
+    svgEl('image', {
+      x: INFO_ICON_X,
+      y: INFO_PANEL_Y + 22,
+      width: INFO_ICON_SIZE,
+      height: INFO_ICON_SIZE,
+      href: 'img/256goat.png',
+    })
+  );
+  const toPlaceLabel = svgEl('text', {
+    x: INFO_ICON_X + INFO_ICON_SIZE + 14,
+    y: INFO_PANEL_Y + 46,
+    style: 'font:600 26px/1 system-ui,sans-serif;fill:#94a3b8;',
+  });
+  toPlaceLabel.textContent = 'To place';
+  infoPanel.appendChild(toPlaceLabel);
+  const goatsToPlaceText = svgEl('text', {
+    x: INFO_ICON_X + INFO_ICON_SIZE + 14,
+    y: INFO_PANEL_Y + 92,
+    style: 'font:700 46px/1 system-ui,sans-serif;fill:#f8fafc;',
+  });
+  goatsToPlaceText.textContent = '20';
+  infoPanel.appendChild(goatsToPlaceText);
+
+  // Divider
+  infoPanel.appendChild(
+    svgEl('line', {
+      x1: INFO_PANEL_X + 16,
+      y1: INFO_PANEL_Y + 112,
+      x2: INFO_PANEL_X + INFO_PANEL_W - 16,
+      y2: INFO_PANEL_Y + 112,
+      stroke: '#334155',
+      'stroke-width': 1,
+    })
+  );
+
+  // Row 2: goats captured
+  infoPanel.appendChild(
+    svgEl('image', {
+      x: INFO_ICON_X,
+      y: INFO_PANEL_Y + 124,
+      width: INFO_ICON_SIZE,
+      height: INFO_ICON_SIZE,
+      href: 'img/256goat-captured.png',
+    })
+  );
+  const capturedLabel = svgEl('text', {
+    x: INFO_ICON_X + INFO_ICON_SIZE + 14,
+    y: INFO_PANEL_Y + 148,
+    style: 'font:600 26px/1 system-ui,sans-serif;fill:#94a3b8;',
+  });
+  capturedLabel.textContent = 'Captured';
+  infoPanel.appendChild(capturedLabel);
+  const goatsCapturedText = svgEl('text', {
+    x: INFO_ICON_X + INFO_ICON_SIZE + 14,
+    y: INFO_PANEL_Y + 196,
+    style: 'font:700 46px/1 system-ui,sans-serif;fill:#f8fafc;',
+  });
+  goatsCapturedText.textContent = '0';
+  infoPanel.appendChild(goatsCapturedText);
+
+  svg.appendChild(infoPanel);
 
   container.appendChild(svg);
 
@@ -531,6 +605,14 @@ export const createRenderer = (container, onCellClick) => {
       statusText.textContent = sideStatus;
       captureLegend.setAttribute('display', 'none');
     }
+
+    // Update info panel counts
+    goatsToPlaceText.textContent = String(boardState.goatsToPlace);
+    goatsCapturedText.setAttribute(
+      'style',
+      `font:700 46px/1 system-ui,sans-serif;fill:${boardState.goatsCaptured > 0 ? colors.south : '#f8fafc'};`
+    );
+    goatsCapturedText.textContent = String(boardState.goatsCaptured);
 
     // Draw or clear board annotations
     if (showAnnotations) {
