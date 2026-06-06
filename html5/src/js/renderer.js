@@ -35,6 +35,7 @@ const CELL_Y = BOARD_CELL_HEIGHT;
 const GRID_X = Math.floor((VB_W - (COLUMNS - 1) * CELL_X) / 2);
 const GRID_Y = Math.floor((VB_H - (ROWS - 1) * CELL_Y) / 2);
 const PIECE_R = BOARD_PIECE_RADIUS;
+const PIECE_SCALE_FACTOR = 2.5;
 
 const colors = {
   background: '#1d3557',
@@ -52,6 +53,7 @@ const colors = {
   captureApproach: '#2563eb',
   captureWithdrawal: '#ea580c',
   captureBoth: '#7c3aed',
+  annotation: '#e0e0e0',
   visitedCell: '#94a3b8',
 };
 
@@ -79,88 +81,17 @@ const pieceColor = piece => {
 const createBoardPattern = () => {
   const layer = svgEl('g', { 'stroke-linecap': 'round' });
 
-  // Increase margin: make rectangle wider, higher, and corners rounder
-  // Make rectangle even larger and corners rounder
+  // Use board image as background
   layer.appendChild(
-    svgEl('rect', {
+    svgEl('image', {
       x: GRID_X - BOARD_BORDER_MARGIN,
       y: GRID_Y - BOARD_BORDER_MARGIN,
       width: (COLUMNS - 1) * CELL_X + BOARD_BORDER_MARGIN_TOTAL,
       height: (ROWS - 1) * CELL_Y + BOARD_BORDER_MARGIN_TOTAL,
-      rx: BOARD_BORDER_RADIUS,
-      fill: colors.board,
-      stroke: colors.strike,
-      'stroke-width': BOARD_BORDER_WIDTH,
+      href: 'img/board.jpg',
+      preserveAspectRatio: 'xMidYMid slice',
     })
   );
-
-  // Horizontal lines
-  for (let row = 0; row < ROWS; row++) {
-    const a = cellCenter(row, 0);
-    const b = cellCenter(row, COLUMNS - 1);
-    layer.appendChild(
-      svgEl('line', {
-        x1: a.x,
-        y1: a.y,
-        x2: b.x,
-        y2: b.y,
-        stroke: colors.line,
-        'stroke-width': BOARD_LINE_STROKE_WIDTH,
-      })
-    );
-  }
-
-  // Vertical lines
-  for (let col = 0; col < COLUMNS; col++) {
-    const a = cellCenter(0, col);
-    const b = cellCenter(ROWS - 1, col);
-    layer.appendChild(
-      svgEl('line', {
-        x1: a.x,
-        y1: a.y,
-        x2: b.x,
-        y2: b.y,
-        stroke: colors.line,
-        'stroke-width': BOARD_LINE_STROKE_WIDTH,
-      })
-    );
-  }
-
-  // Diagonals on alternating nodes.
-  for (let row = 0; row < ROWS - 1; row++) {
-    for (let col = 0; col < COLUMNS - 1; col++) {
-      if (!hasDiagonalEdges(row, col)) continue;
-      const a = cellCenter(row, col);
-      const b = cellCenter(row + 1, col + 1);
-      // Draw only top-left to bottom-right diagonals (a to b)
-      layer.appendChild(
-        svgEl('line', {
-          x1: a.x,
-          y1: a.y,
-          x2: b.x,
-          y2: b.y,
-          stroke: colors.line,
-          'stroke-width': BOARD_DIAGONAL_STROKE_WIDTH,
-        })
-      );
-    }
-    // Inverse diagonals on the remaining cells.
-    for (let col = 0; col < COLUMNS - 1; col++) {
-      if (hasDiagonalEdges(row, col)) continue;
-      const c = cellCenter(row + 1, col);
-      const d = cellCenter(row, col + 1);
-      layer.appendChild(
-        svgEl('line', {
-          x1: c.x,
-          y1: c.y,
-          x2: d.x,
-          y2: d.y,
-          stroke: colors.line,
-          'stroke-width': BOARD_DIAGONAL_STROKE_WIDTH,
-        })
-      );
-    }
-  }
 
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLUMNS; col++) {
@@ -256,13 +187,13 @@ export const createRenderer = (container, onCellClick) => {
     Array.from({ length: COLUMNS }, (_, col) => {
       const pos = cellCenter(row, col);
       const group = svgEl('g');
-      const disc = svgEl('circle', {
-        cx: pos.x,
-        cy: pos.y,
-        r: PIECE_R,
-        fill: 'transparent',
-        stroke: 'transparent',
-        'stroke-width': 0,
+      const disc = svgEl('image', {
+        x: pos.x - PIECE_R * PIECE_SCALE_FACTOR,
+        y: pos.y - PIECE_R * PIECE_SCALE_FACTOR,
+        width: PIECE_R * 2 * PIECE_SCALE_FACTOR,
+        height: PIECE_R * 2 * PIECE_SCALE_FACTOR,
+        href: '',
+        display: 'none',
       });
       const sourceIndicator = svgEl('circle', {
         cx: pos.x,
@@ -346,7 +277,9 @@ export const createRenderer = (container, onCellClick) => {
         'dominant-baseline': 'middle',
         'font-size': fontSize,
         'font-weight': 'bold',
-        fill: '#888888',
+        fill: colors.annotation,
+        stroke: '#000000',
+        'stroke-width': 3,
         'pointer-events': 'none',
         style: 'font-family: system-ui, sans-serif;',
         transform: `rotate(180 ${pos.x} ${GRID_Y - offsetY + 2})`,
@@ -363,7 +296,9 @@ export const createRenderer = (container, onCellClick) => {
         'dominant-baseline': 'middle',
         'font-size': fontSize,
         'font-weight': 'bold',
-        fill: '#888888',
+        fill: colors.annotation,
+        stroke: '#000000',
+        'stroke-width': 3,
         'pointer-events': 'none',
         style: 'font-family: system-ui, sans-serif;',
       });
@@ -383,7 +318,9 @@ export const createRenderer = (container, onCellClick) => {
         'dominant-baseline': 'middle',
         'font-size': fontSize,
         'font-weight': 'bold',
-        fill: '#888888',
+        fill: colors.annotation,
+        stroke: '#000000',
+        'stroke-width': 3,
         'pointer-events': 'none',
         style: 'font-family: system-ui, sans-serif;',
       });
@@ -399,7 +336,9 @@ export const createRenderer = (container, onCellClick) => {
         'dominant-baseline': 'middle',
         'font-size': fontSize,
         'font-weight': 'bold',
-        fill: '#888888',
+        fill: colors.annotation,
+        stroke: '#000000',
+        'stroke-width': 3,
         'pointer-events': 'none',
         style: 'font-family: system-ui, sans-serif;',
         transform: `rotate(180 ${GRID_X + (COLUMNS - 1) * CELL_X + offsetX - 2} ${rightPos.y})`,
@@ -476,11 +415,11 @@ export const createRenderer = (container, onCellClick) => {
         cell.sourceIndicator.setAttribute('display', isLastMoveSource ? 'block' : 'none');
 
         if (piece === EMPTY) {
-          cell.disc.setAttribute('fill', 'transparent');
-          cell.disc.setAttribute('stroke', 'transparent');
-          cell.disc.setAttribute('stroke-width', '0');
+          cell.disc.setAttribute('display', 'none');
         } else {
-          cell.disc.setAttribute('fill', pieceColor(piece));
+          const imageUrl = piece === SOUTH ? 'img/256goat.png' : 'img/256tiger.png';
+          cell.disc.setAttribute('href', imageUrl);
+          cell.disc.setAttribute('display', 'block');
           const isSelected =
             selectedFrom && selectedFrom.row === row && selectedFrom.column === col;
           const isLatest = latestKey === key;
