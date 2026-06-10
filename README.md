@@ -12,6 +12,10 @@ strategy board game Bagh Chal for HTML5/Javascript/CSS platform.
 
 <b>Bagh Chal</b> is a board game.
 
+## Play Online
+
+- [Start game now...](https://omerkel.github.io/BaghChal/html5/src/)
+
 ## Game Components
 
 <table>
